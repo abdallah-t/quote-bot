@@ -2,15 +2,16 @@
 from PIL import Image, ImageDraw, ImageFont
 import json
 
+# get quote
+def get_quote(n):
+    with open('quotes.json', 'r', encoding="utf8") as json_file:
+        quotes = json.load(json_file)
+    
+    quote = quotes["quotes"][n]
+    return quote
+
+
+
 
 WHITE = (255, 255, 255)
 font_path = "./assets/fonts/BASKVILL.TTF"
-
-# Open the image file
-image = Image.open("./images/frame.png")
-
-# Create a drawing object
-draw = ImageDraw.Draw(image)
-
-# Define font size and type
-font = ImageFont.truetype(font_path, 32)
