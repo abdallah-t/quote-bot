@@ -24,4 +24,7 @@ jobs:
         pip install pillow instagrapi
 
     - name: Run Python script
+      env:
+        IG_USERNAME: ${{ secrets.IG_USERNAME}}
+        IG_PASSWORD: ${{ secrets.IG_PASSWORD}}
       run: python main.py

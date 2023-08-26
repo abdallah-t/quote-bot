@@ -43,8 +43,8 @@ frame.save("quote.jpg", format="JPEG")
 
 
 # Post to IG
-username = os.getenv("IG_USERNAME")
-password = os.getenv("IG_PASSWORD")
+#username = os.getenv("IG_USERNAME")
+#password = os.getenv("IG_PASSWORD")
 
 username = os.environ.get("IG_USERNAME")
 password = os.environ.get("IG_PASSWORD")
