@@ -10,10 +10,10 @@ from datetime import datetime
 def days_passed_since(date_str):
     current_date = datetime.now().date()
     target_date = datetime.strptime(date_str, '%d/%m/%Y').date()
-    days_passed = (target_date - current_date).days
+    days_passed = (current_date - target_date).days
     return days_passed
 
-target_date_str = '26/9/2023'
+target_date_str = '26/8/2023'
 n = days_passed_since(target_date_str)
 
 #load_dotenv()
