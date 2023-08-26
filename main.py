@@ -5,9 +5,18 @@ import textwrap
 import os
 #from dotenv import load_dotenv
 from instagrapi import Client
+from datetime import datetime
+
+def days_passed_since(date_str):
+    current_date = datetime.now().date()
+    target_date = datetime.strptime(date_str, '%d/%m/%Y').date()
+    days_passed = (target_date - current_date).days
+    return days_passed
+
+target_date_str = '26/9/2023'
+n = days_passed_since(target_date_str)
 
 #load_dotenv()
-n = 7
 
 # get quote
 def get_quote(n: int) -> str:
@@ -43,13 +52,11 @@ frame.save("quote.jpg", format="JPEG")
 
 
 # Post to IG
-#username = os.getenv("IG_USERNAME")
-#password = os.getenv("IG_PASSWORD")
+username = os.getenv("IG_USERNAME")
+password = os.getenv("IG_PASSWORD")
 
-username = os.environ.get("IG_USERNAME")
-password = os.environ.get("IG_PASSWORD")
 
 client = Client()
 client.login(username=username, password=password)
 
-client.photo_upload("quote.jpg", "test")
+client.photo_upload("quote.jpg", f"day {n}")
