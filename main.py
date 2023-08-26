@@ -3,10 +3,10 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 import textwrap
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from instagrapi import Client
 
-load_dotenv()
+#load_dotenv()
 n = 7
 
 # get quote
