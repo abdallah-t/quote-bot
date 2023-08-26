@@ -2,7 +2,11 @@
 from PIL import Image, ImageDraw, ImageFont
 import json
 import textwrap
+import os
+from dotenv import load_dotenv
+from instagrapi import Client
 
+load_dotenv()
 n = 7
 
 # get quote
@@ -33,9 +37,19 @@ draw = ImageDraw.Draw(frame)
 draw.text(quote_position, quote, font=font, fill=WHITE, anchor="mm")
 draw.text(author_position, author, font=font, fill=WHITE)
 
+frame = frame.convert("RGB")
 
-frame.save("quote.png")
+frame.save("quote.jpg", format="JPEG")
 
 
 # Post to IG
+username = os.getenv("IG_USERNAME")
+password = os.getenv("IG_PASSWORD")
 
+username = os.environ.get("IG_USERNAME")
+password = os.environ.get("IG_PASSWORD")
+
+client = Client()
+client.login(username=username, password=password)
+
+client.photo_upload("quote.jpg", "test")
