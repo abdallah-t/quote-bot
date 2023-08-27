@@ -1,6 +1,6 @@
-# Daily Python Script for Instagram 📷✨
+# Daily Quotes Python Script for Instagram 📷✨
 
-Welcome to the "Daily Python Script for Instagram" project! This script automates the process of creating and posting daily quote images to your Instagram account **[@abdallahquotes](https://www.instagram.com/abdallahquotes/)**. 🚀
+Welcome to the "Daily Quotes Python Script for Instagram" project! This script automates the process of creating and posting daily quote images to your Instagram account **[@abdallahquotes](https://www.instagram.com/abdallahquotes/)**. 🚀
 
 ![Daily Python Script](./assets/images/daily_python_script.jpg)
 
@@ -45,11 +45,11 @@ This project uses Python to generate visually appealing quote images and then po
 
 ## Let's Get Started! 🚀
 
-Now you're all set to start sharing daily inspirational quotes on your Instagram feed under the username **[@abdullahquotes](https://www.instagram.com/abdullahquotes/)**. The GitHub Actions workflow will take care of the rest.
+Now you're all set to start sharing daily inspirational quotes on your Instagram. The GitHub Actions workflow will take care of the rest.
 
 Feel free to customize the templates, fonts, and colors to create a unique style for your quote images.
 
-Happy coding and spreading positivity! 🌟🌈
+Happy coding and spreading positivity! 🌟
 
 ---
 
