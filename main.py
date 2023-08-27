@@ -83,7 +83,7 @@ def main():
     image_path = create_quote_image(quote, template, n)
     caption = f"day {n}"
     
-    #post_to_instagram(image_path, caption)
+    post_to_instagram(image_path, caption)
 
 if __name__ == "__main__":
     main()
