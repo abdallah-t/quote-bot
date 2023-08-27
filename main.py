@@ -1,9 +1,7 @@
-# add it with pillow
 from PIL import Image, ImageDraw, ImageFont
 import json
 import textwrap
 import os
-#from dotenv import load_dotenv
 from instagrapi import Client
 from datetime import datetime
 
@@ -13,50 +11,63 @@ def days_passed_since(date_str):
     days_passed = (current_date - target_date).days
     return days_passed
 
-target_date_str = '26/8/2023'
-n = days_passed_since(target_date_str)
-
-#load_dotenv()
-
-# get quote
-def get_quote(n: int) -> str:
+def load_quotes():
     with open('quotes.json', 'r', encoding="utf8") as json_file:
         quotes = json.load(json_file)
-    
-    quote = quotes["quotes"][n]
-    return quote
+    return quotes["quotes"]
 
+def get_quote(quotes, n):
+    return quotes[n]
 
-# add quote to template
 def wrap_text(text, width):
     wrapped_text = textwrap.fill(text, width=width)
     return wrapped_text
 
-WHITE = (255, 255, 255)
-font_path = "./assets/fonts/BASKVILL.TTF"
-frame_path = "./assets/images/frame.png"
-quote = wrap_text(get_quote(n)["quote"], 40)
-author = get_quote(n)["author"]
-quote_position = (544, 554)
-author_position = (544, 744)
+def create_quote_image(quote, author, n):
+    WHITE = (255, 255, 255)
+    font_path = "./assets/fonts/BASKVILL.TTF"
+    frame_path = "./assets/images/frame.png"
 
-font = ImageFont.truetype(font_path, 41)
-frame = Image.open(frame_path)
-draw = ImageDraw.Draw(frame)
-draw.text(quote_position, quote, font=font, fill=WHITE, anchor="mm")
-draw.text(author_position, author, font=font, fill=WHITE)
+    quote_position = (544, 554)
+    author_position = (544, 744)
 
-frame = frame.convert("RGB")
+    font = ImageFont.truetype(font_path, 41)
+    frame = Image.open(frame_path)
+    draw = ImageDraw.Draw(frame)
+    
+    wrapped_quote = wrap_text(quote, 40)
+    
+    draw.text(quote_position, wrapped_quote, font=font, fill=WHITE, anchor="mm")
+    draw.text(author_position, author, font=font, fill=WHITE)
 
-frame.save("quote.jpg", format="JPEG")
+    frame = frame.convert("RGB")
+    image_path = f"quote_{n}.jpg"
+    frame.save(image_path, format="JPEG")
+    return image_path
 
+def post_to_instagram(image_path, caption):
+    username = os.getenv("IG_USERNAME")
+    password = os.getenv("IG_PASSWORD")
+    
+    client = Client()
+    client.login(username=username, password=password)
+    
+    client.photo_upload(image_path, caption)
 
-# Post to IG
-username = os.getenv("IG_USERNAME")
-password = os.getenv("IG_PASSWORD")
+def main():
+    target_date_str = '26/8/2023'
+    n = days_passed_since(target_date_str)
+    
+    quotes = load_quotes()
+    quote_data = get_quote(quotes, n)
+    
+    quote = quote_data["quote"]
+    author = quote_data["author"]
+    
+    image_path = create_quote_image(quote, author, n)
+    caption = f"day {n}"
+    
+    post_to_instagram(image_path, caption)
 
-
-client = Client()
-client.login(username=username, password=password)
-
-client.photo_upload("quote.jpg", f"day {n}")
+if __name__ == "__main__":
+    main()
