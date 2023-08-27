@@ -1,11 +1,14 @@
 {
        "templates": [
               {
-                     "frame_path": "./assets/images/galaxy",
+                     "frame_path": "./assets/images/galaxy.jpg",
                      "quote_font_path": "assets\\fonts\\BASKVILL.TTF",
                      "author_font_path": "assets\\fonts\\BASKVILL.TTF",
                      "quote_position": [544, 554],
-                     "author_position": [544, 744]
+                     "author_position": [544, 744],
+                     "quote_font_size": 41,
+                     "author_font_size": 41,
+                     "wrap_width": 40
               }
        ],
        "quotes": [

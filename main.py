@@ -13,41 +13,52 @@ def days_passed_since(date_str):
 
 def load_quotes():
     with open('data.json', 'r', encoding="utf8") as json_file:
-        quotes = json.load(json_file)
-    return quotes["quotes"]
+        data = json.load(json_file)
+    return data["quotes"]
 
 def load_templates():
     with open('data.json', 'r', encoding="utf8") as json_file:
-        quotes = json.load(json_file)
-    return quotes["templates"]
+        data = json.load(json_file)
+    return data["templates"]
     
-def get_quote(quotes, n):
+def get_quote(quotes: list, n: int) -> dict:
     return quotes[n]
 
-def wrap_text(text, width):
+def get_template(templates: list, n: int) -> dict:
+    return templates[n]
+
+def wrap_text(text: str, width: int) -> str:
     wrapped_text = textwrap.fill(text, width=width)
     return wrapped_text
 
-def create_quote_image(quote, author, n):
+def create_quote_image(quote_dict: dict, template: dict, n: int) -> str:
     WHITE = (255, 255, 255)
-    font_path = "./assets/fonts/BASKVILL.TTF"
-    frame_path = "./assets/images/frame.png"
+    quote = quote_dict["quote"]
+    author = quote_dict["author"]
 
-    quote_position = (544, 554)
-    author_position = (544, 744)
+    quote_font_path = template["quote_font_path"]
+    author_font_path = template["author_font_path"]
+    frame_path = template["frame_path"]
+    
+    quote_font_size = template["quote_font_size"]
+    author_font_size = template["author_font_size"]
+    wrap_width = template["wrap_width"]
 
-    font = ImageFont.truetype(font_path, 41)
+    quote_position = template["quote_position"]
+    author_position = template["author_position"]
+
+    quote_font = ImageFont.truetype(quote_font_path, quote_font_size)
+    author_font = ImageFont.truetype(author_font_path, author_font_size)
     frame = Image.open(frame_path)
     draw = ImageDraw.Draw(frame)
     
-    wrapped_quote = wrap_text(quote, 40)
+    wrapped_quote = wrap_text(quote, wrap_width)
     
-    draw.text(quote_position, wrapped_quote, font=font, fill=WHITE, anchor="mm")
-    draw.text(author_position, author, font=font, fill=WHITE)
+    draw.text(quote_position, wrapped_quote, font=quote_font, fill=WHITE, anchor="mm")
+    draw.text(author_position, author, font=author_font, fill=WHITE)
 
-    frame = frame.convert("RGB")
     image_path = f".\quotes\quote_{n}.jpg"
-    frame.save(image_path, format="JPEG")
+    frame.save(image_path)
     return image_path
 
 def post_to_instagram(image_path, caption):
@@ -62,14 +73,14 @@ def post_to_instagram(image_path, caption):
 def main():
     target_date_str = '26/8/2023'
     n = days_passed_since(target_date_str)
+    template_int = 0
     
     quotes = load_quotes()
-    quote_data = get_quote(quotes, n)
+    quote = get_quote(quotes, n)
+    templates = load_templates()
+    template = get_template(templates, template_int)
     
-    quote = quote_data["quote"]
-    author = quote_data["author"]
-    
-    image_path = create_quote_image(quote, author, n)
+    image_path = create_quote_image(quote, template, n)
     caption = f"day {n}"
     
     #post_to_instagram(image_path, caption)
