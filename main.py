@@ -12,10 +12,15 @@ def days_passed_since(date_str):
     return days_passed
 
 def load_quotes():
-    with open('quotes.json', 'r', encoding="utf8") as json_file:
+    with open('data.json', 'r', encoding="utf8") as json_file:
         quotes = json.load(json_file)
     return quotes["quotes"]
 
+def load_templates():
+    with open('data.json', 'r', encoding="utf8") as json_file:
+        quotes = json.load(json_file)
+    return quotes["templates"]
+    
 def get_quote(quotes, n):
     return quotes[n]
 
@@ -41,7 +46,7 @@ def create_quote_image(quote, author, n):
     draw.text(author_position, author, font=font, fill=WHITE)
 
     frame = frame.convert("RGB")
-    image_path = f"quote_{n}.jpg"
+    image_path = f".\quotes\quote_{n}.jpg"
     frame.save(image_path, format="JPEG")
     return image_path
 
@@ -67,7 +72,7 @@ def main():
     image_path = create_quote_image(quote, author, n)
     caption = f"day {n}"
     
-    post_to_instagram(image_path, caption)
+    #post_to_instagram(image_path, caption)
 
 if __name__ == "__main__":
     main()
