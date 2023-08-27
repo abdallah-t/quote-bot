@@ -73,7 +73,7 @@ def post_to_instagram(image_path, caption):
 def main():
     target_date_str = '26/8/2023'
     n = days_passed_since(target_date_str)
-    template_int = 0
+    template_int = 1
     
     quotes = load_quotes()
     quote = get_quote(quotes, n)
