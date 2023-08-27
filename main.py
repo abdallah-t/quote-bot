@@ -55,7 +55,7 @@ def create_quote_image(quote_dict: dict, template: dict, n: int) -> str:
     wrapped_quote = wrap_text(quote, wrap_width)
     
     draw.text(quote_position, wrapped_quote, font=quote_font, fill=WHITE, anchor="mm")
-    draw.text(author_position, author, font=author_font, fill=WHITE)
+    draw.text(author_position, author, font=author_font, fill=WHITE, anchor="mm")
 
     image_path = f".\quotes\quote_{n}.jpg"
     frame.save(image_path)
@@ -83,7 +83,7 @@ def main():
     image_path = create_quote_image(quote, template, n)
     caption = f"day {n}"
     
-    #post_to_instagram(image_path, caption)
+    post_to_instagram(image_path, caption)
 
 if __name__ == "__main__":
     main()

@@ -9,6 +9,16 @@
                      "quote_font_size": 41,
                      "author_font_size": 41,
                      "wrap_width": 40
+              },
+              {
+                     "frame_path": "assets\\images\\frame.jpg",
+                     "quote_font_path": "assets\\fonts\\PlayfairDisplay-Italic-VariableFont_wght.ttf",
+                     "author_font_path": "assets\\fonts\\Tajawal-Regular.ttf",
+                     "quote_position": [1000, 950],
+                     "author_position": [1000, 1640],
+                     "quote_font_size": 100,
+                     "author_font_size": 41,
+                     "wrap_width": 20
               }
        ],
        "quotes": [
