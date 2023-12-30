@@ -71,7 +71,7 @@ def post_to_instagram(image_path, caption):
     client.photo_upload(image_path, caption)
 
 def main():
-    target_date_str = '26/8/2023'
+    target_date_str = '26/12/2023'
     n = days_passed_since(target_date_str)
     template_int = 1
     
